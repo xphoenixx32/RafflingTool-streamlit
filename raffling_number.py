@@ -40,8 +40,8 @@ special_probs = special_probs / special_probs.sum()
 st.set_page_config(page_title="Lottery Raffling Tool", layout="centered")
 
 # Title and description
-st.title("Lottery Raffling Tool")
-st.markdown("#### Choose a Sampling Method:")
+st.title("💰 Lottery Raffling Tool")
+st.markdown("#### Choose a Sampling Method 🔽")
 
 # Use a selection box instead of a radio button
 lottery_type = st.selectbox("Select Sampling Method", 
