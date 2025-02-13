@@ -45,7 +45,7 @@ st.markdown("#### Choose a Sampling Method 🔽")
 
 # Use a selection box instead of a radio button
 lottery_type = st.selectbox("Select Sampling Method", 
-                            ("Random Sampling", "Weighted Sampling (Probability starting from 2005)"))
+                            ("Random Sampling", "Weighted Sampling (prob. 2005~now)"))
 
 # Button to perform the draw
 if st.button("Draw Numbers"):
