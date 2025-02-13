@@ -40,6 +40,7 @@ special_probs = special_probs / special_probs.sum()
 st.set_page_config(page_title="Lottery Raffling Tool", layout="centered")
 
 # Title and description
+st.markdown("<h2 style='text-align: center; color: #333;'>Welcome, future billionaires!</h2>", unsafe_allow_html=True)
 st.title("💰 Lottery Raffling Tool")
 st.markdown("#### Choose a Sampling Method 🔽")
 
@@ -54,23 +55,40 @@ if st.button("Draw Numbers"):
         method = "Random Sampling"
     else:
         selected_main, selected_special = weighted_lottery(main_numbers, main_probs, special_numbers, special_probs)
-        method = "Weighted Sampling (Probability-based)"
+        method = "Weighted Sampling (prob. 2005~now)"
     
-    # Display a separator line
+    # HTML for first section (6 numbers) with white background
+    first_section_html = f"""
+    <div style="
+         background-color: white;
+         color: black;
+         padding: 10px;
+         border-radius: 5px;
+         font-size: 24px;
+         font-weight: bold;
+         text-align: center;
+         box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
+         {', '.join(map(str, sorted(selected_main)))}
+    </div>
+    """
+    st.markdown("##### First Section (6 Numbers):", unsafe_allow_html=True)
+    st.markdown(first_section_html, unsafe_allow_html=True)
+    
     st.markdown("---")
-
-    # Display the first section (6 numbers)
-    st.markdown("##### First Section (6 Numbers):")
-    st.markdown(
-        f"<div style='font-size:24px; font-weight:bold;'>{', '.join(map(str, sorted(selected_main)))}</div>", 
-        unsafe_allow_html=True
-    )
     
-    st.markdown("---")
-    
-    # Display the second section (1 number)
-    st.markdown("##### Second Section (1 Number):")
-    st.markdown(
-        f"<div style='font-size:24px; font-weight:bold; color:#e74c3c;'>{selected_special}</div>", 
-        unsafe_allow_html=True
-    )
+    # HTML for second section (1 number) with red background
+    second_section_html = f"""
+    <div style="
+         background-color: #FFCCCC;
+         color: red;
+         padding: 10px;
+         border-radius: 5px;
+         font-size: 24px;
+         font-weight: bold;
+         text-align: center;
+         box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
+         {selected_special}
+    </div>
+    """
+    st.markdown("##### Second Section (1 Number):", unsafe_allow_html=True)
+    st.markdown(second_section_html, unsafe_allow_html=True)
