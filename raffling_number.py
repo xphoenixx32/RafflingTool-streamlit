@@ -51,7 +51,8 @@ if st.button("Draw Numbers"):
     else:
         selected_main, selected_special = weighted_lottery(main_numbers, main_probs, special_numbers, special_probs)
         method = "Weighted Sampling (prob. 2008~now)"
-    
+
+    st.balloons()
     # HTML for first section (6 numbers) with white background
     first_section_html = f"""
     <div style="
@@ -66,7 +67,7 @@ if st.button("Draw Numbers"):
          {', '.join(map(str, sorted(selected_main)))}
     </div>
     """
-    st.markdown("##### First Section (6 Numbers):", unsafe_allow_html=True)
+    st.markdown("###### *First Section (6 Numbers)*", unsafe_allow_html=True)
     st.markdown(first_section_html, unsafe_allow_html=True)
     
     st.markdown("---")
@@ -85,5 +86,5 @@ if st.button("Draw Numbers"):
          {selected_special}
     </div>
     """
-    st.markdown("##### Second Section (1 Number):", unsafe_allow_html=True)
+    st.markdown("###### *Second Section (1 Number)*", unsafe_allow_html=True)
     st.markdown(second_section_html, unsafe_allow_html=True)
