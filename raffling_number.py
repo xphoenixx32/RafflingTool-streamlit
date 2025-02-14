@@ -1,4 +1,5 @@
 import streamlit as st
+import pandas as pd
 import numpy as np
 
 def weighted_lottery(main_numbers, main_probs, special_numbers, special_probs):
