@@ -20,8 +20,8 @@ def fair_lottery(main_numbers, special_numbers):
     selected_special = np.random.choice(special_numbers, size=1, replace=False)
     return list(selected_main), int(selected_special[0])
 
-first_zone = pd.read_csv("asset/first_zone.csv")
-second_zone = pd.read_csv("asset/second_zone.csv")
+first_zone = pd.read_csv("assets/first_zone.csv")
+second_zone = pd.read_csv("assets/second_zone.csv")
 
 main_numbers = first_zone['Number'].values
 main_probs = first_zone['Probability'].values.astype(float)
