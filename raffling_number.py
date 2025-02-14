@@ -52,7 +52,7 @@ if st.button("Draw Numbers"):
         selected_main, selected_special = weighted_lottery(main_numbers, main_probs, special_numbers, special_probs)
         method = "Weighted Sampling (prob. 2008~now)"
 
-    st.snow()
+    st.balloons()
     # HTML for first section (6 numbers) with white background
     first_section_html = f"""
     <div style="
