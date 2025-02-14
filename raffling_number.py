@@ -19,22 +19,16 @@ def fair_lottery(main_numbers, special_numbers):
     selected_special = np.random.choice(special_numbers, size=1, replace=False)
     return list(selected_main), int(selected_special[0])
 
-# Set up the number ranges
-main_numbers = np.arange(1, 39)      # 1 to 38
-special_numbers = np.arange(1, 9)      # 1 to 8
+first_zone = pd.read_csv("asset/first_zone.csv")
+second_zone = pd.read_csv("asset/second_zone.csv")
 
-# Weight parameters for the weighted lottery
-main_probs = np.array([
-    16.14, 14.62, 17.38, 17.04, 14.17, 16.09, 16.25, 16.14, 13.05, 16.54,
-    15.64, 15.47, 15.58, 16.65, 16.85, 16.31, 15.75, 15.13, 16.48, 15.41,
-    15.02, 16.59, 15.80, 17.77, 16.09, 16.48, 15.80, 16.20, 15.47, 15.47,
-    14.29, 15.02, 14.29, 15.47, 15.64, 15.97, 16.93, 15.50
-])
-special_probs = np.array([12.09, 13.78, 12.43, 12.77, 13.33, 11.47, 12.09, 12.04])
+main_numbers = first_zone['Number'].values
+main_probs = first_zone['Probability'].values.astype(float)
+main_probs = main_probs / main_probs.sum() # Normalize probabilities
 
-# Normalize probabilities
-main_probs = main_probs / main_probs.sum()
-special_probs = special_probs / special_probs.sum()
+special_numbers = second_zone['Number'].values
+special_probs = second_zone['Probability'].values.astype(float)
+special_probs = special_probs / special_probs.sum() # Normalize probabilities
 
 # Page configuration
 st.set_page_config(page_title="Lottery Raffling Tool", layout="centered")
@@ -46,7 +40,7 @@ st.markdown("##### Choose a Sampling Method 🔽")
 
 # Use a selection box instead of a radio button
 lottery_type = st.selectbox("Select Sampling Method", 
-                            ("Random Sampling", "Weighted Sampling (prob. 2005~now)"))
+                            ("Random Sampling", "Weighted Sampling (prob. 2008~now)"))
 
 # Button to perform the draw
 if st.button("Draw Numbers"):
@@ -55,7 +49,7 @@ if st.button("Draw Numbers"):
         method = "Random Sampling"
     else:
         selected_main, selected_special = weighted_lottery(main_numbers, main_probs, special_numbers, special_probs)
-        method = "Weighted Sampling (prob. 2005~now)"
+        method = "Weighted Sampling (prob. 2008~now)"
     
     # HTML for first section (6 numbers) with white background
     first_section_html = f"""
