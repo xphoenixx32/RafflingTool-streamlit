@@ -40,7 +40,7 @@ st.markdown("#### 💰 *Lottery Tool*")
 st.markdown("##### Choose a Sampling Method")
 
 # Use a selection box instead of a radio button
-lottery_type = st.selectbox("---- 🔽 ----", 
+lottery_type = st.selectbox("_______🔽_______", 
                             ("Random Sampling", "Weighted Sampling (prob. 2008~now)"))
 
 # Button to perform the draw
