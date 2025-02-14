@@ -37,10 +37,10 @@ st.set_page_config(page_title="Lottery Raffling Tool", layout="centered")
 # Title and description
 st.markdown("<h4 style='text-align: center; color: #333;'>🙌 Welcome, future billionaires!</h2>", unsafe_allow_html=True)
 st.markdown("#### 💰 *Lottery Tool*")
-st.markdown("##### Choose a Sampling Method")
+st.markdown("##### Choose a Sampling Method 🔽")
 
 # Use a selection box instead of a radio button
-lottery_type = st.selectbox("_______🔽_______", 
+lottery_type = st.selectbox(" ", 
                             ("Random Sampling", "Weighted Sampling (prob. 2008~now)"))
 
 # Button to perform the draw
