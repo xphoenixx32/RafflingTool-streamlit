@@ -21,7 +21,7 @@ def fair_lottery(main_numbers, special_numbers):
     selected_special = np.random.choice(special_numbers, size=1, replace=False)
     return list(selected_main), int(selected_special[0])
 
-def fair_lottry_49(main_numbers_49):
+def fair_lottery_49(main_numbers_49):
     selected_main_49 = np.random.choice(main_numbers_49, size=6, replace=False)
     return list(selected_main_49)
 
