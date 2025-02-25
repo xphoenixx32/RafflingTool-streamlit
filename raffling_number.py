@@ -36,7 +36,7 @@ special_numbers = second_zone['Number'].values
 special_probs = second_zone['Probability'].values.astype(float)
 special_probs = special_probs / special_probs.sum() # Normalize probabilities
 
-main_numbers_49 = numbers = np.arange(1, 50, dtype=first_zone['Number'].dtype)
+main_numbers_49 = np.arange(1, 50, dtype=first_zone['Number'].dtype)
 
 # Page configuration
 st.set_page_config(page_title="Lottery Raffling Tool", layout="centered")
