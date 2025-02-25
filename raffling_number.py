@@ -20,6 +20,10 @@ def fair_lottery(main_numbers, special_numbers):
     selected_special = np.random.choice(special_numbers, size=1, replace=False)
     return list(selected_main), int(selected_special[0])
 
+def fair_lottry_49(main_numbers_49):
+    selected_main_49 = np.random.choice(main_numbers_49, size=6, replace=False)
+    return list(selected_main_49)
+
 first_zone = pd.read_csv("assets/first_zone.csv")
 second_zone = pd.read_csv("assets/second_zone.csv")
 
@@ -31,6 +35,8 @@ special_numbers = second_zone['Number'].values
 special_probs = second_zone['Probability'].values.astype(float)
 special_probs = special_probs / special_probs.sum() # Normalize probabilities
 
+main_numbers_49 = numbers = np.arange(1, 50, dtype=first_zone['Number'].dtype)
+
 # Page configuration
 st.set_page_config(page_title="Lottery Raffling Tool", layout="centered")
 
@@ -39,52 +45,89 @@ st.markdown("<h4 style='text-align: center; color: #333;'>🙌 Welcome, future b
 st.markdown("#### 💰 *Lottery Tool*")
 st.markdown("##### Choose a Sampling Method 🔽")
 
+with st.container():
+    selected = option_menu(
+        menu_title = None,
+        options = ['大樂透', '威力彩'],
+        icons = ['currency-exchange', 'cash-stack'],
+        orientation = 'horizontal'
+    )
+    
+if selected == '大樂透':
+    lottery_type = st.selectbox(" ", 
+                                ("Random Sampling (only)"))
+    
+    if st.button("Draw Numbers"):
+        if lottery_type == "Random Sampling":
+            selected_main_49 = fair_lottery_49(main_numbers_49)
+            method = "Random Sampling (only)"
+        st.balloons()
+        # HTML for first section (6 numbers) with white background
+        first_section_html_49 = f"""
+        <div style="
+             background-color: white;
+             color: black;
+             padding: 10px;
+             border-radius: 5px;
+             font-size: 24px;
+             font-weight: bold;
+             text-align: center;
+             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
+             {', '.join(map(str, sorted(selected_main_49)))}
+        </div>
+        """
+        st.markdown("###### *6 Numbers*", unsafe_allow_html=True)
+        st.markdown(first_section_html_49, unsafe_allow_html=True)
+        
+        st.markdown("---")
+        
+if selected == '威力彩':
 # Use a selection box instead of a radio button
-lottery_type = st.selectbox(" ", 
-                            ("Random Sampling", "Weighted Sampling (prob. 2008~now)"))
-
-# Button to perform the draw
-if st.button("Draw Numbers"):
-    if lottery_type == "Random Sampling":
-        selected_main, selected_special = fair_lottery(main_numbers, special_numbers)
-        method = "Random Sampling"
-    else:
-        selected_main, selected_special = weighted_lottery(main_numbers, main_probs, special_numbers, special_probs)
-        method = "Weighted Sampling (prob. 2008~now)"
-
-    st.balloons()
-    # HTML for first section (6 numbers) with white background
-    first_section_html = f"""
-    <div style="
-         background-color: white;
-         color: black;
-         padding: 10px;
-         border-radius: 5px;
-         font-size: 24px;
-         font-weight: bold;
-         text-align: center;
-         box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
-         {', '.join(map(str, sorted(selected_main)))}
-    </div>
-    """
-    st.markdown("###### *First Section (6 Numbers)*", unsafe_allow_html=True)
-    st.markdown(first_section_html, unsafe_allow_html=True)
+    lottery_type = st.selectbox(" ", 
+                                ("Random Sampling", "Weighted Sampling (prob. 2008~now)"))
     
-    st.markdown("---")
+    # Button to perform the draw
+    if st.button("Draw Numbers"):
+        if lottery_type == "Random Sampling":
+            selected_main, selected_special = fair_lottery(main_numbers, special_numbers)
+            method = "Random Sampling"
+        else:
+            selected_main, selected_special = weighted_lottery(main_numbers, main_probs, special_numbers, special_probs)
+            method = "Weighted Sampling (prob. 2008~now)"
     
-    # HTML for second section (1 number) with red background
-    second_section_html = f"""
-    <div style="
-         background-color: #FFCCCC;
-         color: red;
-         padding: 10px;
-         border-radius: 5px;
-         font-size: 24px;
-         font-weight: bold;
-         text-align: center;
-         box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
-         {selected_special}
-    </div>
-    """
-    st.markdown("###### *Second Section (1 Number)*", unsafe_allow_html=True)
-    st.markdown(second_section_html, unsafe_allow_html=True)
+        st.balloons()
+        # HTML for first section (6 numbers) with white background
+        first_section_html = f"""
+        <div style="
+             background-color: white;
+             color: black;
+             padding: 10px;
+             border-radius: 5px;
+             font-size: 24px;
+             font-weight: bold;
+             text-align: center;
+             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
+             {', '.join(map(str, sorted(selected_main)))}
+        </div>
+        """
+        st.markdown("###### *First Section (6 Numbers)*", unsafe_allow_html=True)
+        st.markdown(first_section_html, unsafe_allow_html=True)
+        
+        st.markdown("---")
+        
+        # HTML for second section (1 number) with red background
+        second_section_html = f"""
+        <div style="
+             background-color: #FFCCCC;
+             color: red;
+             padding: 10px;
+             border-radius: 5px;
+             font-size: 24px;
+             font-weight: bold;
+             text-align: center;
+             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
+             {selected_special}
+        </div>
+        """
+        st.markdown("###### *Second Section (1 Number)*", unsafe_allow_html=True)
+        st.markdown(second_section_html, unsafe_allow_html=True)
