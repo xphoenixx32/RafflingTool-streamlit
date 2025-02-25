@@ -56,31 +56,30 @@ with st.container():
     
 if selected == '大樂透':
     lottery_type = st.selectbox(" ", 
-                                ("Random Sampling (only)"))
+                                ("Random Sampling (only)",))
     
     if st.button("Draw Numbers"):
-        if lottery_type == "Random Sampling":
+        if lottery_type == "Random Sampling (only)":
             selected_main_49 = fair_lottery_49(main_numbers_49)
             method = "Random Sampling (only)"
-        st.balloons()
-        # HTML for first section (6 numbers) with white background
-        first_section_html_49 = f"""
-        <div style="
-             background-color: white;
-             color: black;
-             padding: 10px;
-             border-radius: 5px;
-             font-size: 24px;
-             font-weight: bold;
-             text-align: center;
-             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
-             {', '.join(map(str, sorted(selected_main_49)))}
-        </div>
-        """
-        st.markdown("###### *6 Numbers*", unsafe_allow_html=True)
-        st.markdown(first_section_html_49, unsafe_allow_html=True)
-        
-        st.markdown("---")
+            st.balloons()
+            # HTML for first section (6 numbers) with white background
+            first_section_html_49 = f"""
+            <div style="
+                 background-color: white;
+                 color: black;
+                 padding: 10px;
+                 border-radius: 5px;
+                 font-size: 24px;
+                 font-weight: bold;
+                 text-align: center;
+                 box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
+                 {', '.join(map(str, sorted(selected_main_49)))}
+            </div>
+            """
+            st.markdown("###### *6 Numbers*", unsafe_allow_html=True)
+            st.markdown(first_section_html_49, unsafe_allow_html=True)
+            st.markdown("---")
         
 if selected == '威力彩':
 # Use a selection box instead of a radio button
